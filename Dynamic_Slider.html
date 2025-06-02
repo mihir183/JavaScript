@@ -48,11 +48,19 @@
             ]
             const append = document.getElementById('append')
 
-            for (let i = 0; i < arr.length; i++) {
+            // Using For loop
+            // for (let i = 0; i < arr.length; i++) {
+            //     append.innerHTML += `<div class="carousel-item active">
+            //             <img src="${arr[i]}" class="d-block w-100" alt="..." height="600">
+            //         </div>`
+            // }
+
+            // using forEach Loop
+            arr.forEach( ele => {
                 append.innerHTML += `<div class="carousel-item active">
-                        <img src="${arr[i]}" class="d-block w-100" alt="..." height="600">
+                        <img src="${ele}" class="d-block w-100" alt="..." height="600">
                     </div>`
-            }
+            })
         </script>
     </body>
 
