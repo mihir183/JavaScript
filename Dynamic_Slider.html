@@ -43,12 +43,14 @@
                 "assets/images//Erkunde die faszinierende Welt meiner digitalen….jpg",
                 "assets/images/Timeless Beauty_ White Ferrari F50 Wallpaper with Scenic Sunrise.jpg",
                 "assets/images/Porsche Wallpaper – stilvolle kostenlose Hintergrundbilder für Deine Devices.jpg",
-                "assets/images/download.jpg"
+                "assets/images/download.jpg",
+                "assets/images/p1.jpg"
             ]
             const append = document.getElementById('append')
+
             for (let i = 0; i < arr.length; i++) {
-                append.innerHTML += ` <div class="carousel-item active">
-                        <img src="`+arr[i]+`" class="d-block w-100" alt="..." height="600">
+                append.innerHTML += `<div class="carousel-item active">
+                        <img src="${arr[i]}" class="d-block w-100" alt="..." height="600">
                     </div>`
             }
         </script>
