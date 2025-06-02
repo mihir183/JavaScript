@@ -19,15 +19,7 @@
         <div class="container px-5 m-auto">
             <div id="carouselExample" class="carousel slide p-5 ps-0 rounded rounded-1">
                 <div class="carousel-inner rounded-5" id="append">
-                    <div class="carousel-item active">
-                        <img src="assets/images//Erkunde die faszinierende Welt meiner digitalen….jpg" class="d-block w-100" alt="..." height="600">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="assets/images/Timeless Beauty_ White Ferrari F50 Wallpaper with Scenic Sunrise.jpg" class="d-block w-100" alt="..." height="600">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="assets/images/Porsche Wallpaper – stilvolle kostenlose Hintergrundbilder für Deine Devices.jpg" class="d-block w-100" alt="..." height="600">
-                    </div>
+                    
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -46,6 +38,19 @@
 
         <script>
             document.querySelector(".container").style.cssText = "width:1250px"
+
+            const arr = [
+                "assets/images//Erkunde die faszinierende Welt meiner digitalen….jpg",
+                "assets/images/Timeless Beauty_ White Ferrari F50 Wallpaper with Scenic Sunrise.jpg",
+                "assets/images/Porsche Wallpaper – stilvolle kostenlose Hintergrundbilder für Deine Devices.jpg",
+                "assets/images/download.jpg"
+            ]
+            const append = document.getElementById('append')
+            for (let i = 0; i < arr.length; i++) {
+                append.innerHTML += ` <div class="carousel-item active">
+                        <img src="`+arr[i]+`" class="d-block w-100" alt="..." height="600">
+                    </div>`
+            }
         </script>
     </body>
 
