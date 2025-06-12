@@ -11,7 +11,7 @@
 
     <body>
 
-        <div class="container px-5 mt-5" id="box">
+        <div class="container px-5 py-2 mt-3 bg-dark text-light rounded-2" id="box">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
@@ -41,35 +41,34 @@
                 </select>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="male" id="male">
+                <input class="form-check-input gender" type="radio" name="gender" value="male" id="male">
                 <label class="form-check-label" for="male">Male</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" value="female" id="female">
+                <input class="form-check-input gender" type="radio" name="gender" value="female" id="female">
                 <label class="form-check-label" for="female">Female</label>
             </div>
             <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" value="Cricket" name="hobby">
+                <input class="form-check-input hobbies" type="checkbox" value="Cricket" name="hobbies">
                 <label class="form-check-label" for="flexCheckDefault">
                     Cricket
                 </label>
             </div>
             <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" value="Video Editing" name="hobby">
+                <input class="form-check-input hobbies" type="checkbox" value="Video Editing" name="hobbies">
                 <label class="form-check-label" for="flexCheckDefault">
                     Video Editing
                 </label>
             </div>
             <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" value="Coding" name="hobby">
+                <input class="form-check-input hobbies" type="checkbox" value="Coding" name="hobbies">
                 <label class="form-check-label" for="flexCheckDefault">
                     Coding
                 </label>
             </div>
-            <br>
             <div class="form-floating">
                 <textarea class="form-control" placeholder="Leave a comment here" id="address"
-                    style="height: 100px; width:550px;"></textarea>
+                    style="height: 100px; width:450px;"></textarea>
                 <label for="address">Addres</label>
             </div>
             <button class="btn btn-primary mt-3" id="submit">Submit</button>
@@ -82,20 +81,24 @@
         <script>
             document.getElementById('box').style.cssText = "width:550px"
 
-            const hobby = []
-            class Student {
-
-            }
+            var hobby = []        
+            // let hobbies = document.querySelectorAll('.hobbies').values
+            // hobbies.forEach(ele => {
+            //     hobby.push(ele.value)
+            // });
 
             document.getElementById('submit').addEventListener('click', () => {
-                var name = document.getElementById('name').value
-                var email = document.getElementById('email').value
-                var password = document.getElementById('password').value
-                var city = document.getElementById('city').value
-                var gender = document.getElementsByClassName('gender').value
-                hobby = document.getElementsByClassName('hobby').value
-                console.log(name,email,password,city,gender,hobby)
-                // const std = new Student()
+                const Student = {
+                    Name : document.getElementById('name').value,
+                    Email : document.getElementById('email').value,
+                    Password : document.getElementById('password').value,
+                    City : document.getElementById('city').value,
+                    Address : document.getElementById('address').value,
+                    Gender : document.getElementsByClassName('gender:checked').value,
+                    Hobby:hobby
+                }
+                
+                console.log(Student)
             })
         </script>
     </body>
