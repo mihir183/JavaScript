@@ -57,14 +57,50 @@
             }
             document.write("<br>")
 
-            for (let i = 0;i<=n;i++) {
-                for(let j = n;j>0;j--)
-                {
+            for (let i = n; i >= 0; i--) {
+                for (let j = 0; j <= i; j++) {
                     document.write(" * ")
                 }
                 document.write("<br>")
             }
+            document.write("<br>")
 
+            for (i = 1; i <= 4; i++) {
+                for (j = 1; j <= i; j++) {
+                    document.write(i)
+                }
+                document.write("<br>")
+            }
+            document.write("<br>")
+
+            c = 1
+            for (i = 0; i <= 3; i++) {
+                for (j = 0; j <= i; j++) {
+                    document.write(c)
+                    c++
+                }
+                document.write("<br>")
+            }
+            document.write("<br>")
+
+            c = 10
+            for (i = 0; i <= 3; i++) {
+                for (j = 0; j <= i; j++) {
+                    document.write(c)
+                    c--
+                }
+                document.write("<br>")
+            }
+            document.write("<br>")
+
+            c = 10
+            for (i = 4; i > 0; i--) {
+                for (j = i; j > 0; j--) {
+                    document.write(c)
+                    c--
+                }
+                document.write("<br>")
+            }
         </script>
     </body>
 
