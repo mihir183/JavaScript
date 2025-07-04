@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Array based on Old Array</title>
+    </head>
+
+    <body>
+        <script>
+            const arr = [2, 3, 4, 15, 18, 17];
+            const even = [];
+
+            arr.forEach((ele) => {
+                if (ele % 2 == 0) {
+                    even.push(ele);
+                }
+            })
+            document.write(even)
+        </script>
+    </body>
+
+</html>
