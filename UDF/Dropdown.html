@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dropdown</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <div class="container mt-5 px-lg-5 px-sm-1">
+        <form>
+            <label for="value1" class="form-label mb-3">Number 1</label>
+            <input type="text" class="form-control mb-3" name="value1" id="value1">
+            <label for="value2" class="form-label mb-3">Number 2</label>
+            <input type="text" class="form-control mb-3" name="value2" id="value2">
+
+            <select name="op" id="op" class="form-control mb-3" onchange="calc(parseInt(this.value))">
+                <option value="1" selected>Addition</option>
+                <option value="2">Subtraction</option>
+                <option value="3">Multiplicaton</option>
+                <option value="4">Division</option>
+            </select>
+        </form>
+        <div id="output" class="w-auto p-2">
+
+        </div>
+    </div>
+
+    <script>
+        function calc(choise){
+            var n1 = parseInt(document.getElementById('value1').value)
+            var n2 = parseInt(document.getElementById('value2').value)
+
+            switch(choise){
+                case 1:
+                    op = "Addition"
+                    res = n1+n2;
+                    break;
+                case 2:
+                    op = "Subtraction"
+                    res = n1-n2;
+                    break;
+                case 3:
+                    op = "Multiplication"
+                    res = n1*n2;
+                    break;
+                case 4:
+                    op = "Division"
+                    res = n1/n2;
+                    break;
+                default:
+                    alert("Invalid Choise......!")
+            }
+
+            document.getElementById('output').innerHTML = `${op} of ${n1} and ${n2} is ${res}`;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  </body>
+</html>
