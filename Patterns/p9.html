@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Print A to Z</title>
+    </head>
+
+    <body>
+        <script>
+            a = 65;
+            for (i =0; i < 26; i++) {
+                for (j = 0; j <= i; j++) {
+                    document.write(String.fromCharCode(a)+" ")
+                }
+                document.write("<br>")
+                a++;
+            }
+        </script>
+    </body>
+
+</html>

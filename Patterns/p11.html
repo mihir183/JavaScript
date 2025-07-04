@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Print 1 to N number Tables</title>
+    </head>
+
+    <body>
+        <script>
+            var n = parseInt(prompt("Enter Number to print 1 to N numbers Tables :"))
+
+            for (i = 1; i <= n; i++) {
+                for (j = 1; j <= 10; j++) {
+                    document.write(i + " * "+j+" = "+i*j+"<br>")
+                }
+                document.write("<br>")
+            }
+        </script>
+    </body>
+
+</html>
