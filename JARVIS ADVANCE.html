@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Write to Speak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container m-auto w-50 mt-5">
+        <h3 class="text-capitalize text-center fw-bolder mb-3">write to speak</h3>
+        <input type="text" id="input" class="form-control mb-3" placeholder="Type something..." autofocus>
+        <select id="voiceSelect" class="form-select mb-3"></select>
+        <button class="btn btn-primary d-block mx-auto" onclick="speak()">Speak</button>
+    </div>
+
+    <script>
+      const voiceSelect = document.getElementById('voiceSelect');
+      let voices = [];
+
+      // Load voices and populate dropdown
+      function populateVoices() {
+        voices = speechSynthesis.getVoices();
+
+        voiceSelect.innerHTML = '';
+
+        voices.forEach((voice, index) => {
+          const option = document.createElement('option');
+          option.value = index;
+          option.textContent = `${voice.name} (${voice.lang}) ${voice.default ? '-- Default' : ''}`;
+          voiceSelect.appendChild(option);
+        });
+      }
+
+      // Some browsers delay voice loading
+      speechSynthesis.onvoiceschanged = populateVoices;
+
+      function speak() {
+        const text = document.getElementById('input').value;
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        // Set selected voice
+        const selectedVoiceIndex = voiceSelect.value;
+        if (voices[selectedVoiceIndex]) {
+          utterance.voice = voices[selectedVoiceIndex];
+        }
+
+        // Optional: clear input after speech ends
+        utterance.onend = function () {
+          document.getElementById('input').value = '';
+        };
+
+        speechSynthesis.speak(utterance);
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
