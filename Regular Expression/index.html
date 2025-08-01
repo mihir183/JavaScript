@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Regular Expression</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+        <!-- Font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+            integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            display: grid;
+            place-content: center;
+            height: 100vh;
+        }
+    </style>
+
+    <body>
+
+        <div class="box">
+            <label for="num" class="form-label">Phone <i class="fa-solid" id="thumb"></i></label>
+                    <input type="text" class="form-control mb-2" id="num" autofocus maxlength="10"
+                        oninput="this.value = this.value.replace(/[^0-9]/g,'').slice(0,10)">
+                    
+            <div class="row"></div>
+            <p id="message" class="text-capitalize small"></p>
+            <button class="btn btn-primary" type="submit" id="click">verify</button>
+        </div>
+        <script>
+            // start => /^
+            // end => $/
+            // range => []
+            // unlimited => *
+            // {min,max}
+
+            var number = /^[6789][0-9]{9}$/
+
+            document.querySelector("#click").addEventListener('click', () => {
+                var num = document.querySelector("#num").value
+
+                var output = document.querySelector('#message')
+                var thumb = document.querySelector('#thumb')
+
+                output.innerHTML = ""
+
+                output.classList.remove("text-success", "text-danger");
+                thumb.classList.remove("fa-thumbs-up", "fa-thumbs-down");
+
+                if (number.test(num)) {
+                    output.classList.add("text-success")
+                    thumb.classList.add("fa-thumbs-up")
+                    output.innerHTML = 'this is valid mobile number'
+                } else {
+                    output.classList.add("text-danger")
+                    thumb.classList.add("fa-thumbs-down")
+                    output.innerHTML = 'this is not valid mobile number'
+                }
+            })
+
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+            crossorigin="anonymous"></script>
+    </body>
+
+</html>
