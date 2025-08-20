@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Whether API</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <!-- 3D Modal -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow-x: hidden;
+      }
+
+      .row {
+        height: 100vh !important;
+        position: relative;
+      }
+
+      .row .col {
+        height: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 350px;
+      }
+
+      #setelite {
+        position: absolute;
+        bottom: 10%;
+        left: 25%;
+        transform: scaleX(-1);
+      }
+
+      #astro {
+        position: absolute;
+        top: 10%;
+        right: 23%;
+        transform: rotate(-20deg);
+      }
+
+      /* #earth {
+        position: absolute;
+        top: 10%;
+        right: 23%;
+        transform: rotate(-20deg);
+      } */
+    </style>
+  </head>
+
+  <body>
+    <div class="row p-0 row-cols-3 gap-0">
+      <div class="col p-0">
+        <img src="assets/images/api.png" alt="">
+      </div>
+      <div class="col p-0">
+        <img src="assets/images/api2.png" alt="">
+      </div>
+      <div class="col p-0">
+        <img src="assets/images/api3.png" alt="">
+      </div>
+    </div>
+
+    <div class="box text-center m-auto">
+      <form>
+        <input type="text" class="form-control mb-3 bg-transparent text-light" id="input" autofocus>
+        <button id="submit" class="btn btn-primary text-capitalize mb-3">check weather</button>
+      </form>
+      <p class="text-capitalize fs-4 text-light" id="res"></p>
+    </div>
+
+    <img src="assets/images/s2.png" id="setelite" alt="" width="200">
+    <img src="assets/images/a.png" id="astro" alt="" width="200">
+
+    <!-- <model-viewer src="assets/3D/Earth.glb" id="earth" alt="3D model" auto-rotate camera-controls shadow-intensity="1"
+      style="width: 600px; height: 400px;" exposure="1.2"
+      environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
+      skybox-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr">
+    </model-viewer> -->
+
+
+
+    <script src="secret.js"></script>
+    <script>
+      // const apiKey = "a9f3f0efac35dc0d03b9251d5735703f";
+      document.querySelector("#submit").addEventListener('click', (e) => {
+        e.preventDefault()
+        const country = document.querySelector("#input").value;
+
+        if (country) {
+          fetch(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${API_KEY}&units=metric`)
+            .then(response => response.json())
+            .then(data => {
+              console.log("Weather Data:", data);
+              console.log(`Temperature in ${country}: ${data.main.temp}°C`);
+              document.querySelector("#res").innerHTML = `Temperature in ${country}: ${data.main.temp}°C`
+
+              document.querySelector("#input").value = ""
+            })
+            .catch(
+              error => {
+                console.error("Error fetching weather data:", error)
+                document.querySelector("#res").innerHTML = "Error fetching weather data:"
+              }
+            );
+        }
+      })
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"></script>
+  </body>
+
+</html>
+
+
+<!-- https://api.openweathermap.org/data/2.5/weather?q=London&appid=a9f3f0efac35dc0d03b9251d5735703f&units=metric -->
