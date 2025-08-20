@@ -34,12 +34,32 @@
         }
       }
 
+      h1 {
+        position: absolute;
+        top: 12%;
+        left: 10%;
+        overflow: hidden;
+        font-weight: 900;
+      }
+
+      .typing {
+        position: absolute;
+        top: 19%;
+        left: 12%;
+        color: white;
+        font-weight: 600;
+        border-right: 2px solid #0f0;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      
       .box {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 350px;
+        height: 200px;
       }
 
       #setelite {
@@ -54,7 +74,13 @@
         top: 10%;
         right: 23%;
         transform: rotate(-20deg);
+        transition: transform 1s ease-in-out;
+
+        &:hover {
+          transform: rotate(40deg);
+        }
       }
+
 
       /* #earth {
         position: absolute;
@@ -86,6 +112,10 @@
       <p class="text-capitalize fs-4 text-light" id="res"></p>
     </div>
 
+    <h1 class="text-light text-capitalize">
+      Whether
+    </h1>
+    <div id="autoType" class="typing"></div>
     <img src="assets/images/s2.png" id="setelite" alt="" width="200">
     <img src="assets/images/a.png" id="astro" alt="" width="200">
 
@@ -99,7 +129,43 @@
 
     <script src="secret.js"></script>
     <script>
-      // const apiKey = "a9f3f0efac35dc0d03b9251d5735703f";
+
+      const texts = [
+        "Welcome to My Website 🚀",
+        "I am a Full Stack Developer 💻",
+        "I love JavaScript ⚡",
+        "Let's build something amazing! 🌍",
+        "Whether check with My Website"
+      ];
+
+      let i = 0; // which text
+      let j = 0; // which letter
+      let currentText = "";
+      let isDeleting = false;
+
+      function typeEffect() {
+        currentText = texts[i];
+
+        if (isDeleting) {
+          document.getElementById("autoType").innerHTML = currentText.substring(0, j--);
+        } else {
+          document.getElementById("autoType").innerHTML = currentText.substring(0, j++);
+        }
+
+        if (!isDeleting && j === currentText.length) {
+          isDeleting = true;
+          setTimeout(typeEffect, 1000); // pause before delete
+          return;
+        } else if (isDeleting && j === 0) {
+          isDeleting = false;
+          i = (i + 1) % texts.length; // next text
+        }
+
+        setTimeout(typeEffect, isDeleting ? 80 : 120);
+      }
+
+      window.onload = typeEffect;
+
       document.querySelector("#submit").addEventListener('click', (e) => {
         e.preventDefault()
         const country = document.querySelector("#input").value;
