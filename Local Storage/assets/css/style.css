@@ -1,0 +1,10 @@
+body{
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#close{
+    top: 10px;
+    right: 10px;
+}

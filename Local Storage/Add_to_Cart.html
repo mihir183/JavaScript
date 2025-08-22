@@ -11,14 +11,9 @@
         <!-- Font Awsome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        <link rel="stylesheet" href="assets/css/style.css">
+
         <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
-        <style>
-            body{
-                background-image: url("assets/images/logo.png");
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-        </style>
     </head>
 
     <body>
@@ -76,97 +71,7 @@
             <div class="row justify-content-center" id="output"></div>
         </div>
 
-        <script>
-
-            let blogList = JSON.parse(localStorage.getItem('movies'))
-
-            let title = document.querySelector('#title')
-            let url = document.querySelector('#url')
-            let rating = document.querySelector('#rating')
-            let category = document.querySelector('#category')
-            let discription = document.querySelector('#discription')
-            let search = document.querySelector('#search')
-
-            show()
-
-            // Add Data in Local Storage
-            document.querySelector("#submit").addEventListener('click', () => {
-
-                if(title.value && url.value && rating.value){    
-
-                    const arr = blogList || []
-                    const id = Date.now()
-    
-                    movie_obj = {
-                        id,
-                        title: title.value,
-                        url: url.value,
-                        rating: rating.value,
-                        category: category.value,
-                        discription: discription.value
-                    }
-    
-                    arr.push(movie_obj)
-                    localStorage.setItem("movies", JSON.stringify(arr))
-                    document.querySelector("#myForm").reset()
-                    show()
-
-                }else{
-                    alert("Enter Data")
-                }
-
-            })
-
-            // Clear Local Storage
-            document.querySelector("#clear").addEventListener('click',()=>{
-                localStorage.clear()
-                show()
-            })
-
-            // Searching
-            document.querySelector("#search").addEventListener('input',()=>{
-                // alert('m')
-
-            })
-
-            // Show Data from Local Storage
-            function show() {
-                blogList = JSON.parse(localStorage.getItem('movies'))
-                let output = ""
-
-                if (!blogList || blogList.length === 0) {
-                    output = `
-                        <div class="col-md-3 text-center text-capitalize">no data</div>
-                    `
-                    document.querySelector("#output").innerHTML = output
-                }
-                else{
-                    blogList.forEach((ele,index) => {
-                        output += `
-                            <div class="col-md-3">
-                                <div class="card shadow-lg">
-                                    <img src=${ele.url} class="card-img-top" alt="Movie Poster" height="300">
-
-                                    <div class="card-body text-center">
-                                        <ul class="list-unstyled text-capitalize">
-                                            <li><strong>Title:</strong> ${ele.title}</li>
-                                            <li><strong>Rating:</strong> ${ele.rating}</li>
-                                            <li><strong>category:</strong> ${ele.category}</li>
-                                            <li><strong>discription:</strong> ${ele.discription}</li>
-                                            <li class="mt-2">
-                                                <button class="btn btn-info">add to cart</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        `
-                    });
-
-                    document.querySelector("#output").innerHTML = output
-                }
-            }
-        </script>
+        <script src="assets/js/add_to_cart.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
