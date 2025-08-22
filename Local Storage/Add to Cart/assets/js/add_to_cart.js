@@ -90,5 +90,9 @@ function show() {
 
 // Delete Card
 function trash(id){
-
+    const filterData = blogList.filter((ele)=>{
+        return ele.id !== id
+    })
+    localStorage.setItem("movies",JSON.stringify(filterData))
+    window.location.reload()
 }
