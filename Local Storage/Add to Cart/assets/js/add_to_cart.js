@@ -3,11 +3,16 @@ let cartList = JSON.parse(localStorage.getItem('cart'))
 
 let title = document.querySelector('#title')
 let url = document.querySelector('#url')
+let price = document.querySelector('#price')
 let rating = document.querySelector('#rating')
 let category = document.querySelector('#category')
 let discription = document.querySelector('#discription')
 let search = document.querySelector('#search')
 let count = document.querySelector("#count")
+
+if(blogList && blogList.length > 0){
+    document.querySelector('#box').style.display = 'block'
+}
 
 
 show()
@@ -23,6 +28,7 @@ function show() {
             <div class="col-md-3 text-center text-capitalize">no data</div>
         `
         document.querySelector("#output").innerHTML = output
+        document.querySelector("#output").style.display = 'none'
     }
     else{
         blogList.forEach((ele,index) => {
@@ -35,6 +41,7 @@ function show() {
                         <div class="card-body text-center">
                             <ul class="list-unstyled text-capitalize">
                                 <li><strong>Title:</strong> ${ele.title}</li>
+                                <li><strong>Title:</strong> ${ele.price}</li>
                                 <li><strong>Rating:</strong> ${ele.rating}</li>
                                 <li><strong>category:</strong> ${ele.category}</li>
                                 <li><strong>discription:</strong> ${ele.discription}</li>
@@ -46,7 +53,7 @@ function show() {
                     </div>
                 </div>
             `
-        });
+        })
 
         document.querySelector("#output").innerHTML = output
         let num = (JSON.parse(localStorage.getItem('cart')) || []).length;
@@ -57,6 +64,7 @@ function show() {
 function showCart(){
 
     let res = ""
+    let total = 0
 
     if(!cartList || cartList.length == 0){
         res =  `
@@ -65,22 +73,32 @@ function showCart(){
             </div>
         `
         document.querySelector("#cart_list").innerHTML = res
-
+        document.querySelector("#total").innerHTML = `<b>grand total</b> : ${total}`
     }else{
         cartList.forEach((ele)=>{
             res += `
                 <div class="row align-items-center my-1">
                     <div class="col text-center"><img src="${ele.url}" alt="" width="50"></div>
                     <div class="col text-center text-capitalize">${ele.title}</div>
+                    <div class="col text-center text-capitalize">${ele.price}</div>
+                    <div class="col text-center text-capitalize">
+                        <input type="number" value="${ele.count}" min="1" onChange="change(${ele.id},this.value)" style="width:50px"/>
+                    </div>
+                    <div class="col text-center text-capitalize item-total">${ele.price * ele.count}</div>
                     <div class="col text-center">
                         <button class="btn btn-danger" onClick="trash_cart(${ele.id})">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </div>
                 </div>
-            `
-            document.querySelector("#cart_list").innerHTML = res
-        })
+                `
+                document.querySelector("#cart_list").innerHTML = res
+            })
+
+            document.querySelectorAll(".item-total").forEach(el => {
+                total += parseInt(el.textContent) || 0;
+            });
+            document.querySelector("#total").innerHTML = `<b>grand total</b> : ${total}`
     }
 
 }
@@ -97,6 +115,7 @@ document.querySelector("#submit").addEventListener('click', () => {
         id,
         title: title.value,
         url: url.value,
+        price: parseInt(price.value),
         rating: rating.value,
         category: category.value,
         discription: discription.value
@@ -121,7 +140,7 @@ document.querySelector("#clear").addEventListener('click',()=>{
 
 // Searching
 document.querySelector("#search").addEventListener('input',()=>{
-    // alert('m')
+    let keyword = search.value.toLowerCase().trim();
 
 })
 
@@ -145,16 +164,20 @@ function trash_cart(id){
     })
     localStorage.setItem('cart',JSON.stringify(cartList))
     showCart()
+    show()
 }
 
 // Add to Cart
 function add(id){
     const arr2 = cartList || []
 
-    const cart_obj = blogList.find((ele) => ele.id === id);
+    let cart_obj = blogList.find((ele) => ele.id === id);
 
     let exist = arr2.some(ele => ele.id === id);
 
+    cart_obj.count = 1
+    // cart_obj = {...cart_obj, count: 1 };
+    // console.log(cart_obj)
     if(exist){
         alert("alreay Exist in Cart")
     }else{
@@ -166,3 +189,16 @@ function add(id){
     showCart()
     show()
 }
+
+// Increse or Decrese item price base on quantity
+function change(id,newCount){
+    cartList = cartList.map(ele => {
+        if (ele.id === id) {
+            return { ...ele, count: parseInt(newCount) }; // update count
+        }
+        return ele;
+        });
+
+    localStorage.setItem("cart", JSON.stringify(cartList));
+    showCart()
+    }

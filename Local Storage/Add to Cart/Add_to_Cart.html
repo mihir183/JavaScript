@@ -41,6 +41,8 @@
                 <input type="text" class="form-control mb-3" name="title" id="title" autofocus>
                 <label for="url" class="form-label text-capitalize">url</label>
                 <input type="url" class="form-control mb-3" name="url" id="url" autocomplete="on">
+                <label for="price" class="form-label text-capitalize">price</label>
+                <input type="text" class="form-control mb-3" name="price" id="price" autocomplete="on">
                 <label for="rating" class="form-label text-capitalize">rating</label>
                 <select name="rating" id="rating" class="form-control mb-3 text-capitalize">
                     <option value="" disabled selected>-- select rating --</option>
@@ -70,7 +72,7 @@
 
         </div>
 
-        <div class="container my-4 py-3 bg-light rounded-3">
+        <div class="container my-4 py-3 bg-light rounded-3" id="box" style="display: none;">
             <div class="row justify-content-center" id="output"></div>
         </div>
 
@@ -82,12 +84,15 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Cart List</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="cart_list">
-                        
+                    <div class="modal-body" id="cart_list"></div>
+                    <div class="modal-body">
+                        <div class="row flex-row-reverse px-3 text-capitalize">
+                            <div class="col col-4 border-top text-center" id="total"></div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                        <button type="button" class="btn btn-primary px-5">Buy</button>
                     </div>
                 </div>
             </div>
