@@ -174,8 +174,7 @@
           fetch(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${API_KEY}&units=metric`)
             .then(response => response.json())
             .then(data => {
-              console.log("Weather Data:", data);
-              console.log(`Temperature in ${country}: ${data.main.temp}°C`);
+              console.log(data)
               document.querySelector("#res").innerHTML = `Temperature in ${country}: ${data.main.temp}°C`
 
               document.querySelector("#input").value = ""

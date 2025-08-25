@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url("../images/back1.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 200px;
+}
+
+.text{
+    width: 350px;
+    z-index: 9999;
+    position: absolute;
+    top: 19%;
+    left: 19%;
+    font-weight: 700;
+    text-shadow: 15px 10px 5px black;
+}
