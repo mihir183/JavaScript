@@ -65,15 +65,16 @@
                 </select>
                 <label for="discription" class="form-label text-capitalize">discription</label>
                 <textarea name="discription" id="discription" class="form-control mb-3"></textarea>
-
                 <button type="button" class="btn btn-primary" id="submit">add</button>
-                <button type="button" class="btn btn-danger" id="clear">clear all</button>
             </form>
-
+            
         </div>
-
+        
         <div class="container my-4 py-3 bg-light rounded-3" id="box" style="display: none;">
-            <div class="row justify-content-center" id="output"></div>
+            <button type="button" class="btn bg-danger position-absolute z-3" id="clear">clear all</button>
+            <div class="row justify-content-center" id="output">
+
+            </div>
         </div>
 
         <!-- Modal -->

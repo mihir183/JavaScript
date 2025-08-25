@@ -28,7 +28,7 @@ function show() {
             <div class="col-md-3 text-center text-capitalize">no data</div>
         `
         document.querySelector("#output").innerHTML = output
-        document.querySelector("#output").style.display = 'none'
+        document.querySelector("#box").style.display = "none"
     }
     else{
         blogList.forEach((ele,index) => {
@@ -55,6 +55,8 @@ function show() {
             `
         })
 
+
+        document.querySelector("#box").style.display = 'block'
         document.querySelector("#output").innerHTML = output
         let num = (JSON.parse(localStorage.getItem('cart')) || []).length;
         count.innerHTML = num;
