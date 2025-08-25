@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndexedDB Example</title>
+</head>
+<body>
+  <h2>IndexedDB Example</h2>
+
+  <input type="text" id="username" placeholder="Enter Name">
+  <button id="saveBtn">Save</button>
+  <button id="showBtn">Show All</button>
+
+  <ul id="output"></ul>
+
+  <script>
+    let db;
+
+    // 1. Open / create database
+    let request = indexedDB.open("MyDatabase", 1);
+
+    request.onupgradeneeded = function(e) {
+      db = e.target.result;
+      if (!db.objectStoreNames.contains("users")) {
+        db.createObjectStore("users", { keyPath: "id", autoIncrement: true });
+      }
+      console.log("Database setup complete ✅");
+    };
+
+    request.onsuccess = function(e) {
+      db = e.target.result;
+      console.log("Database opened ✅");
+    };
+
+    request.onerror = function(e) {
+      console.error("Error opening database ❌", e);
+    };
+
+    // 2. Save data
+    document.getElementById("saveBtn").addEventListener("click", () => {
+      let name = document.getElementById("username").value;
+      if (name) {
+        let tx = db.transaction("users", "readwrite");
+        let store = tx.objectStore("users");
+        store.add({ name });
+        tx.oncomplete = () => console.log("Data saved ✅");
+      }
+    });
+
+    // 3. Show all data
+    document.getElementById("showBtn").addEventListener("click", () => {
+      let tx = db.transaction("users", "readonly");
+      let store = tx.objectStore("users");
+      let req = store.getAll();
+
+      req.onsuccess = () => {
+        let list = req.result;
+        let output = document.getElementById("output");
+        output.innerHTML = "";
+        list.forEach(user => {
+          let li = document.createElement("li");
+          li.textContent = `ID: ${user.id} - Name: ${user.name}`;
+          output.appendChild(li);
+        });
+      };
+    });
+  </script>
+</body>
+</html>

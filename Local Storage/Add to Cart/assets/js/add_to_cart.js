@@ -21,6 +21,7 @@ showCart()
 
 function show() {
     blogList = JSON.parse(localStorage.getItem('movies'))
+    let cartList = JSON.parse(localStorage.getItem('cart'))
     let output = ""
 
     if (!blogList || blogList.length === 0) {
@@ -33,7 +34,7 @@ function show() {
     else{
         blogList.forEach((ele,index) => {
             output += `
-                <div class="col-md-3 my-2">
+                <div class="col-md-3 col-10 col-sm-6 my-2">
                     <div class="card shadow">
                         <button class="btn btn-close position-absolute bg-danger" id="close" onClick="trash(${ele.id})"></button>
                         <img src=${ele.url} class="card-img-top" alt="Movie Poster" height="300">
@@ -58,13 +59,19 @@ function show() {
 
         document.querySelector("#box").style.display = 'block'
         document.querySelector("#output").innerHTML = output
-        let num = (JSON.parse(localStorage.getItem('cart')) || []).length;
-        count.innerHTML = num;
     }
+    if(cartList|| cartList.length > 0){
+        num=cartList.length
+    }else{
+        num=0
+    }
+    count.innerHTML = num;
 }
 
 function showCart(){
 
+    cartList = JSON.parse(localStorage.getItem('cart'))
+    
     let res = ""
     let total = 0
 
@@ -79,15 +86,15 @@ function showCart(){
     }else{
         cartList.forEach((ele)=>{
             res += `
-                <div class="row align-items-center my-1">
-                    <div class="col text-center"><img src="${ele.url}" alt="" width="50"></div>
-                    <div class="col text-center text-capitalize">${ele.title}</div>
-                    <div class="col text-center text-capitalize">${ele.price}</div>
-                    <div class="col text-center text-capitalize">
+                <div class="row align-items-center gap-0 my-1">
+                    <div class="col px-0 text-center"><img src="${ele.url}" alt="" class="rounded-2" width="50"></div>
+                    <div class="col px-0 text-center text-capitalize">${ele.title}</div>
+                    <div class="col px-0 text-center text-capitalize">${ele.price}</div>
+                    <div class="col px-0 text-center text-capitalize">
                         <input type="number" value="${ele.count}" min="1" onChange="change(${ele.id},this.value)" style="width:50px"/>
                     </div>
-                    <div class="col text-center text-capitalize item-total">${ele.price * ele.count}</div>
-                    <div class="col text-center">
+                    <div class="col px-0 text-center text-capitalize item-total">${ele.price * ele.count}</div>
+                    <div class="col px-0 text-center">
                         <button class="btn btn-danger" onClick="trash_cart(${ele.id})">
                             <i class="fa-solid fa-trash"></i>
                         </button>
@@ -154,8 +161,15 @@ function trash(id){
         const filterData = blogList.filter((ele)=>{
             return ele.id !== id
         })
+
+        const filterItem = cartList.filter((ele)=>{
+            return ele.id !== id
+        })
+
         localStorage.setItem("movies",JSON.stringify(filterData))
+        localStorage.setItem("cart",JSON.stringify(filterItem))
         show()
+        showCart()
     }
 }
 
