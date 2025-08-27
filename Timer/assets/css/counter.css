@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url("../images/back.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box{
+    padding: 0;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    h3{
+        font-size: 200px;
+        font-weight: 900;
+        color: rgb(5, 123, 162);
+        text-shadow: 10px 10px 10px black;
+    }
+}

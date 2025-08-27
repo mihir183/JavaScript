@@ -14,9 +14,7 @@ if(blogList && blogList.length > 0){
     document.querySelector('#box').style.display = 'block'
 }
 
-
 show()
-
 showCart()
 
 function show() {
